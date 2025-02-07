@@ -1,0 +1,97 @@
+#include <stdio.h>
+
+int main() {
+    puts("Группа: Пин24 \nНомер: 1 \nСостав команды: Свечкин Семен");
+    return 0;
+}
+
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <stddef.h> // для некоторых типов
+#include <wchar.h>
+
+// Макрос для вывода размера типа с пояснением
+#define PRINT_SIZE(type) printf("Размер типа " #type ": %d байт\n", sizeof(type))
+
+int main() {
+    PRINT_SIZE(char);
+    PRINT_SIZE(char*);
+    PRINT_SIZE(bool);
+    PRINT_SIZE(wchar_t);
+    PRINT_SIZE(short);
+    PRINT_SIZE(unsigned short);
+    PRINT_SIZE(int);
+    PRINT_SIZE(long);
+    PRINT_SIZE(long long);
+    PRINT_SIZE(float);
+    PRINT_SIZE(double);
+    PRINT_SIZE(double*);
+    PRINT_SIZE(long double);
+    PRINT_SIZE(size_t);
+    PRINT_SIZE(ptrdiff_t);
+    PRINT_SIZE(void*);
+
+    return 0;
+}
+
+#include <stdio.h>
+
+// Функция для вывода числа в двоичном формате
+void print_binary(unsigned long long n, int size) {
+    for (int i = size - 1; i >= 0; i--) {
+        printf("%d", (n >> i) & 1);
+    }
+}
+
+int main() {
+    // Инициализация массивов
+    char Mb[5] = {0xED, 0xED, 0xED, 0xED, 0xED};
+    short Ms[5] = {0xFADE, 0xFADE, 0xFADE, 0xFADE, 0xFADE};
+    int ML[5] = {0xADE1A1DA, 0xADE1A1DA, 0xADE1A1DA, 0xADE1A1DA, 0xADE1A1DA};
+    long long Mg[5] = {0xC1A551F1AB1E, 0xC1A551F1AB1E, 0xC1A551F1AB1E, 0xC1A551F1AB1E, 0xC1A551F1AB1E};
+    float MF[5] = {8.0/3.0, 8.0/3.0, 8.0/3.0, 8.0/3.0, 8.0/3.0};
+    double MFl[5] = {8.0/3.0, 8.0/3.0, 8.0/3.0, 8.0/3.0, 8.0/3.0};
+
+    // Вывод целочисленных массивов
+    for (int i = 0; i < 5; i++) {
+        // Mb
+        printf("Mb[%d] (hex): 0x%02X\n", i, Mb[i]);
+        printf("Mb[%d] (bin): ", i); print_binary(Mb[i], 8); printf("\n");
+        printf("Mb[%d] (unsigned): %u\n", i, Mb[i]);
+        printf("Mb[%d] (signed): %d\n\n", i, Mb[i]);
+
+        // Ms
+        printf("Ms[%d] (hex): 0x%04X\n", i, Ms[i]);
+        printf("Ms[%d] (bin): ", i); print_binary(Ms[i], 16); printf("\n");
+        printf("Ms[%d] (unsigned): %u\n", i, Ms[i]);
+        printf("Ms[%d] (signed): %d\n\n", i, Ms[i]);
+
+        // ML
+        printf("ML[%d] (hex): 0x%08X\n", i, ML[i]);
+        printf("ML[%d] (bin): ", i); print_binary(ML[i], 32); printf("\n");
+        printf("ML[%d] (unsigned): %u\n", i, ML[i]);
+        printf("ML[%d] (signed): %d\n\n", i, ML[i]);
+
+        // Mg
+        printf("Mg[%d] (hex): 0x%012llX\n", i, Mg[i]);
+        printf("Mg[%d] (bin): ", i); print_binary(Mg[i], 64); printf("\n");
+        printf("Mg[%d] (unsigned): %llu\n", i, Mg[i]);
+        printf("Mg[%d] (signed): %lld\n\n", i, Mg[i]);
+    }
+
+    // Вывод массивов с плавающей запятой
+    for (int i = 0; i < 5; i++) {
+        // MF
+        printf("MF[%d] (hex): %A\n", i, MF[i]);
+        printf("MF[%d] (exp): %e\n", i, MF[i]);
+        printf("MF[%d] (float): %f\n\n", i, MF[i]);
+
+        // MFl
+        printf("MFl[%d] (hex): %lA\n", i, MFl[i]);
+        printf("MFl[%d] (exp): %le\n", i, MFl[i]);
+        printf("MFl[%d] (double): %lf\n\n", i, MFl[i]);
+    }
+
+    return 0;
+}
